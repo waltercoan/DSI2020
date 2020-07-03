@@ -16,16 +16,27 @@
                     <th scope="col">Nome</th>
                     <th scope="col">Sexo</th>
                     <th scope="col">Data de Nascimento</th>
+                    <th></th>
                 </thead>
                 <tbody>
                     <tr scope="row" th:each="umpaciente : ${listapacientes}">
                         <td th:text="${umpaciente.nome}"></td>
                         <td th:text="${umpaciente.sexo}"></td>
                         <td th:text="${umpaciente.dataNascimento}"></td>
+                        <td><a th:href="@{'/paciente/alterar/' + ${umpaciente.id}}" class="btn btn-primary">Alterar</a></td>
                     </tr>
                 </tbody>
             </table>
 		</div>
         <div th:include="layout :: footer" id="footer">(footer)</div>
+        <script type="text/javascript">
+            $(document).ready(function(){
+                
+                /*bootbox.confirm("EU NAO ACREDITO!!!", function(){
+
+                });*/
+
+            });
+        </script>
     </body>
 </html> 
