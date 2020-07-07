@@ -43,4 +43,11 @@ public class PacienteController {
         return new ModelAndView("paciente/form","paciente",paciente);
     }
 
+    @GetMapping(value="/delete/{id}")
+    public ModelAndView delete(@PathVariable("id") Paciente paciente){
+        service.delete(paciente);
+        return new ModelAndView("redirect:/paciente");
+    }
+
+
 }
