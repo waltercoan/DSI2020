@@ -10,7 +10,7 @@
             <h1>Pacientes</h1>
             
             <p><a th:href="@{/paciente/novo}" class="btn btn-primary btn-lg" >Novo</a></p>
-
+            
             <table class="table" id="pacientes">
                 <thead class="thead-light">
                     <th scope="col">Nome</th>
@@ -26,7 +26,7 @@
                         <td>
                             <a th:href="@{'/paciente/alterar/' + ${umpaciente.id}}" class="btn btn-primary">Alterar</a>
                             <button class='btn btn-danger js-delete'
-								th:data-id="${umpaciente.id}"><span class="oi oi-bug"></span>Excluir</button>
+								th:data-id="${umpaciente.id}"><span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>Excluir</button>
                         </td>
                     </tr>
                 </tbody>
