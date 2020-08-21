@@ -8,6 +8,9 @@ sudo apt-get update
 sudo apt-get install mariadb-server
 sudo /etc/init.d/mysql start
 
+##Como gerar o dicionário de dados por tabela
+show columns from nome_da_tabela
+
 ##Caso ocorra erro no Spring-Boot Dashboard
 - Instalar a OpenJDK11 no Code Spaces
 wget https://github.com/AdoptOpenJDK/openjdk11-binaries/releases/download/jdk-11.0.8+10/OpenJDK11U-jdk_x64_linux_hotspot_11.0.8_10.tar.gz -O /tmp/OpenJDK11U-jdk_x64_linux_hotspot_11.0.8_10.tar.gz
