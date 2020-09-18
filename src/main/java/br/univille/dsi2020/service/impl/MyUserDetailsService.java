@@ -6,6 +6,7 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
   
 import br.univille.dsi2020.repository.UsuarioRepository;
@@ -15,7 +16,19 @@ public class MyUserDetailsService implements UserDetailsService {
   
     @Autowired
     private UsuarioRepository repository; 
-  
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
+    public void save(Usuario usuario){
+        if (usuario.getSenha().length() != 0) 
+            usuario.setSenha(passwordEncoder.encode(usuario.getSenha()));
+        repository.save(usuario);
+    }
+
+    public Usuario buscaUsuario(String nomeUsuario){
+        return repository.findByUsuario(nomeUsuario);
+    }
+
     public Usuario buscaUsuarioSenha(String nomeUsuario, String senhaUsuario){
         return repository.findByUsuarioAndSenha(nomeUsuario, senhaUsuario);
     }
