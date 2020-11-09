@@ -2,6 +2,8 @@ package br.univille.dsi2020.service.impl;
 
 import java.util.ArrayList;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -38,5 +40,11 @@ public class MyUserDetailsService implements UserDetailsService {
         Usuario usuario = repository.findByUsuario(nomeUsuario);
         return new User(usuario.getUsuario(),usuario.getSenha(), new ArrayList<>());
     }  
+
+    public Usuario getUserLogged(){
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        Usuario usuario = repository.findByUsuario(authentication.getName());
+        return usuario;
+    }
       
 }
