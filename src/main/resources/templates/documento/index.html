@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+    <head th:include="layout :: htmlhead"></head>
+
+    <body>
+        <div class="container">
+			<nav th:replace="layout :: menu">(menu)</nav>
+            <h1>Documentos</h1>
+            
+            <p><a th:href="@{/documento/novo}" class="btn btn-primary btn-lg" >Novo</a></p>
+            
+            <table class="table" id="documentos">
+                <thead class="thead-light">
+                    <th scope="col">Id</th>
+                    <th scope="col">Data</th>
+                    <th scope="col">Número Arquivos</th>
+                    <th></th>
+                </thead>
+                <tbody>
+                    <tr scope="row" th:each="umdocumento : ${listadocumentos}">
+                        <td th:text="${umdocumento.id}"></td>
+                        <td th:text="${umdocumento.data}"></td>
+                        <td th:text="${umdocumento.itens.size()}"></td>
+                        <td>
+                            <a th:href="@{'/documento/detalhar/' + ${umdocumento.id}}" class="btn btn-warning">Detalhar</a>
+                            <a th:href="@{'/documento/alterar/' + ${umdocumento.id}}" class="btn btn-primary">Alterar</a>
+                            <button class='btn btn-danger js-delete'
+								th:data-id="${umdocumento.id}"><span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>Excluir</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+		</div>
+        <div th:include="layout :: footer" id="footer">(footer)</div>
+        <script type="text/javascript">
+            $(document).ready(function(){
+                
+                $("#documentos").on("click", ".js-delete", function(){
+					var button = $(this);
+					bootbox.confirm("Você tem certeza que quer excluir este Documento?",function(result){
+						if(result){
+							$.ajax({
+		                        url: "/documento/delete/" + button.attr("data-id"),
+		                        method: "GET",
+		                        success: function () {
+		                        	window.location.href = "/documento/"
+		                        }
+		                    });
+						}
+					});
+				});
+
+            });
+        </script>
+    </body>
+</html> 
